@@ -1,0 +1,9 @@
+https://www.semanticscholar.org/
+
+Neural dependency parsing: https://www.aclweb.org/anthology/D14-1082.pdf
+
+Parsing with LSTM representations: https://www.aclweb.org/anthology/Q16-1023.pdf
+
+code-mixed parsing: https://www.aclweb.org/anthology/N18-1090/
+
+analysis of dependency parsing: https://www.aclweb.org/anthology/D18-1278.pdf
