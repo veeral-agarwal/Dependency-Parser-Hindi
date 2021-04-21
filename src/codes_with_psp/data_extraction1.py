@@ -10,78 +10,70 @@ head_tag = 0
 # tt = []
 # tt1 = []
 tags = {
-    "NP": [],
-    "JJP": [],
-    "CCP": [],
-    "VGNF": [],
-    "VGF": [],
-    "BLK": [],
-    "VGNN": [],
-    "RBP": [],
-    "FRAGP": [],
-    "NEGP": []
+    "NP": [],"JJP": [],"CCP": [],"VGNF": [],"VGF": [],"BLK": [],"VGNN": [],"RBP": [],"FRAGP": [],"NEGP": []
 }
 
-with open(argv[1], "r") as f:
-    for line in f:
-        # print(count)
-        if (line.rstrip()):
-            line = re.sub("\s+"," ",line)
-            troot = 0 
-            line1 = line.split(' ')
-            if (line1[0] == "<Sentence"):
-                count +=1
-                print("<Sentence id=" + "\'" + str(count) + "\'>")
-            elif(line1[0].strip() == "</Sentence>"):
-                print(line1[0].strip())    
-            elif(line1[0].strip() == "))"):
-                # if head_tag == "VGF" and head_const_tags in t: 
-                    # if(str(count) not in tt1):
-                        # cnt += 1
-                        # tt1.append(str(count))
+f = open(argv[1], "r")
 
-                if head_const_tags not in tags[str(head_tag)]:
-                    indx = len(tags[str(head_tag)])
-                    tags[str(head_tag)].insert(indx,head_const_tags)
-                troot = 0
-                continue
-            elif(line1[1] == "(("):
-                head_const_tags = ""
-                head_tag = 0
-                name = 0
-                drel = 0
-                relation = 0
-                relative = 0 
-                if(line1[2].split("_")[0] == "NULL"):
-                    head_tag = line1[2].split("_")[2]
-                else:
-                    head_tag = line1[2]
-                        
-                for i in range(4,len(line1)):
-                    if(line1[i].split("=")[0] == "name"):
-                        name = line1[i].split('=')[1].split("\'")[1]
-                    elif(line1[i].split("=")[0] == "drel" or line1[i].split("=")[0] == "dmrel"):
-                        drel = 1
-                        relation = line1[i].split("=")[1].split("\'")[1].split(":")[0]
-                        relative = line1[i].split("=")[1].split("\'")[1].split(":")[1]
+for line in f:
+    # print(count)
+    if (line.rstrip()):
+        line = re.sub("\s+"," ",line)
+        troot = 0 
+        line1 = line.split(' ')
+        if (line1[0] == "<Sentence"):
+            count +=1
+            print("<Sentence id=" + "\'" + str(count) + "\'>")
+        elif(line1[0].strip() == "</Sentence>"):
+            print(line1[0].strip())    
+        elif(line1[0].strip() == "))"):
+            # if head_tag == "VGF" and head_const_tags in t: 
+                # if(str(count) not in tt1):
+                    # cnt += 1
+                    # tt1.append(str(count))
 
-                print("H" + " " + head_tag + " ",end = " ")        
-
-                if(name != 0):
-                    print(name + " ",end=" ")
-                else:
-                    print("NULL ",end=" ")
-
-                if(drel != 0):
-                    print(relation + " " + relative)
-                else:
-                    print("NULL ROOT")
+            if head_const_tags not in tags[str(head_tag)]:
+                indx = len(tags[str(head_tag)])
+                tags[str(head_tag)].insert(indx,head_const_tags)
+            troot = 0
+            continue
+        elif(line1[1] == "(("):
+            head_const_tags = ""
+            relation,relative,drel,name,head_tag = 0,0,0,0,0
+            # name = 0
+            # drel = 0
+            # relation = 0
+            # relative = 0 
+            if(line1[2].split("_")[0] == "NULL"):
+                head_tag = line1[2].split("_")[2]
             else:
-                troot = line1[1]
-                troot_tag = line1[2]
-                troot_lemma = line1[4].split("=")[1].split("\'")[1].split(",")[0]
-                print("T " + troot + " " + troot_tag + " " + troot_lemma)
-                head_const_tags = head_const_tags + " " + troot_tag
+                head_tag = line1[2]
+                    
+            for i in range(4,len(line1)):
+                if(line1[i].split("=")[0] == "name"):
+                    name = line1[i].split('=')[1].split("\'")[1]
+                elif(line1[i].split("=")[0] == "drel" or line1[i].split("=")[0] == "dmrel"):
+                    drel = 1
+                    relation = line1[i].split("=")[1].split("\'")[1].split(":")[0]
+                    relative = line1[i].split("=")[1].split("\'")[1].split(":")[1]
+
+            print("H" + " " + head_tag + " ",end = " ")        
+
+            if(name != 0):
+                print(name + " ",end=" ")
+            else:
+                print("NULL ",end=" ")
+
+            if(drel != 0):
+                print(relation + " " + relative)
+            else:
+                print("NULL ROOT")
+        else:
+            troot = line1[1]
+            troot_tag = line1[2]
+            troot_lemma = line1[4].split("=")[1].split("\'")[1].split(",")[0]
+            print("T " + troot + " " + troot_tag + " " + troot_lemma)
+            head_const_tags = head_const_tags + " " + troot_tag
 
 # print(tags['NP'])
 # print()
