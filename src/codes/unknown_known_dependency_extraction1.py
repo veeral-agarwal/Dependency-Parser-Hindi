@@ -14,31 +14,40 @@ def extract_unknown_dependencies():
 				cnt,pair1,pair2 = 0,[heads_name[dependent_index] , heads_name[head_index - 1]],[heads_name[dependent_index] , heads_name[dependent_index + 1]]
 				# pair2 = [heads_name[dependent_index] , heads_name[dependent_index + 1]]
 				# cnt = 0
-				if pair1 not in unknown_dependencies_name and pair1 not in tags_pair:
-                    
-					unknown_dependencies_name.insert(len(unknown_dependencies_name),pair1)
-					cnt += 1
-				if pair2 not in unknown_dependencies_name and pair2 not in tags_pair:
-					unknown_dependencies_name.insert(len(unknown_dependencies_name),pair2)
-					cnt += 1
+				if pair1 not in unknown_dependencies_name :
+					if pair1 not in tags_pair:
+						indx = len(unknown_dependencies_name) 
+						unknown_dependencies_name.insert(indx,pair1)
+						cnt += 1
+				if pair2 not in unknown_dependencies_name :
+					if pair2 not in tags_pair:
+						unknown_dependencies_name.insert(len(unknown_dependencies_name),pair2)
+						cnt += 1
 
 				if(cnt < 2):
 					for i in range(dependent_index + 2,head_index - 1,1):
 						pair = [heads_name[dependent_index] , heads_name[i]]
+						indx=0
 						if pair not in unknown_dependencies_name and pair not in tags_pair:
-							unknown_dependencies_name.insert(len(unknown_dependencies_name),pair)
+							indx = len(unknown_dependencies_name)
+							unknown_dependencies_name.insert(indx,pair)
 							cnt += 1
 						if(cnt == 2):
 							break		
 
 			elif (head_index ) > 1+dependent_index:
-				pair1 = [heads_name[dependent_index],heads_name[dependent_index + 1]]
+				pair1,indx = [heads_name[dependent_index],heads_name[dependent_index + 1]],0
+				
 				if pair1 not in unknown_dependencies_name and pair1 not in tags_pair:
+    				
+
+					indx = len(unknown_dependencies_name)
 					unknown_dependencies_name.insert(len(unknown_dependencies_name),pair1)
 				elif (head_index ) > 2+dependent_index:	
-					pair = [heads_name[dependent_index],heads_name[dependent_index + 2]]
+					pair,indx = [heads_name[dependent_index],heads_name[dependent_index + 2]],0
 					if pair not in unknown_dependencies_name and pair not in tags_pair:
-						unknown_dependencies_name.insert(len(unknown_dependencies_name),pair)
+						indx= len(unknown_dependencies_name)
+						unknown_dependencies_name.insert(indx,pair)
 
 		elif(tags[dependency][2] == "L"):
 			if(tags[dependency][0] != "ROOT" and tags[dependency][1] != "BLK"):
@@ -49,46 +58,55 @@ def extract_unknown_dependencies():
 					# pair2 = [heads_name[dependent_index - 1] , heads_name[dependent_index]]
 					# cnt = 0
 					if pair1 not in unknown_dependencies_name and pair1 not in tags_pair:
-						unknown_dependencies_name.insert(len(unknown_dependencies_name),pair1)
+						indx = len(unknown_dependencies_name)
+						unknown_dependencies_name.insert(indx,pair1)
 						cnt += 1
 					if pair2 not in unknown_dependencies_name and pair2 not in tags_pair:
-						unknown_dependencies_name.insert(len(unknown_dependencies_name),pair2)
+						indx = len(unknown_dependencies_name)
+						unknown_dependencies_name.insert(indx,pair2)
 						cnt += 1
 
 					if(2>cnt):
 						for i in range(dependent_index - 2,head_index + 1,-1):
-							pair = [heads_name[i] , heads_name[dependent_index]]
+							pair,indx = [heads_name[i] , heads_name[dependent_index]],0
 							if pair not in unknown_dependencies_name and pair not in tags_pair:
-								unknown_dependencies_name.insert(len(unknown_dependencies_name),pair)
+								indx = len(unknown_dependencies_name)
+								unknown_dependencies_name.insert(indx ,pair)
 								cnt += 1
 							if(cnt == 2):
 								break
 
 				elif (head_index ) > 1+dependent_index:
-					pair1 = [heads_name[dependent_index - 1] , heads_name[dependent_index]]
+					pair1,indx = [heads_name[dependent_index - 1] , heads_name[dependent_index]],0
+					
 					if pair1 not in unknown_dependencies_name and pair1 not in tags_pair:
-						unknown_dependencies_name.insert(len(unknown_dependencies_name),pair1)
+						indx = len(unknown_dependencies_name)
+						unknown_dependencies_name.insert(indx,pair1)
 					elif (head_index ) > 2+dependent_index:
-						pair = [heads_name[dependent_index-2] , heads_name[dependent_index]]
+						pair,insx = [heads_name[dependent_index-2] , heads_name[dependent_index]],0
 						if pair not in unknown_dependencies_name and pair not in tags_pair:
-							unknown_dependencies_name.insert(len(unknown_dependencies_name),pair)
+							indx = len(unknown_dependencies_name)
+							unknown_dependencies_name.insert(indx,pair)
 
 			else:
 				# for BLK and ROOT(for ex. "vgf")
 				dependent_index,cnt = heads_name.index(tags[dependency][1]),0
 				# cnt = 0
 				for i in range(dependent_index-1 , -1 , -1):
-					pair = [heads_name[i], heads_name[dependent_index]]
+    			
+					indx,pair = 0,[heads_name[i], heads_name[dependent_index]]
 					if(pair not in unknown_dependencies_name and pair not in tags_pair):
-						unknown_dependencies_name.insert(len(unknown_dependencies_name),pair)
+						indx = len(unknown_dependencies_name)
+						unknown_dependencies_name.insert(indx,pair)
 						cnt += 1
 					if(cnt == 2):
 						break
 				cnt = 0
 				for i in range(0 , dependent_index-1,1):
-					pair = [heads_name[i], heads_name[dependent_index]]
+					pair,indx = [heads_name[i], heads_name[dependent_index]],0
 					if(pair not in unknown_dependencies_name and pair not in tags_pair):
-						unknown_dependencies_name.insert(len(unknown_dependencies_name),pair)
+						indx = len(unknown_dependencies_name)
+						unknown_dependencies_name.insert(indx,pair)
 						cnt += 1
 					if(cnt == 2):
 						break
@@ -100,7 +118,8 @@ def extract_unknown_dependencies():
 					for i in range(dependent_index-1 , -1 , -1):
 						pair = ["ROOT",heads_name[i]]
 						if(pair not in unknown_dependencies_name and pair not in tags_pair):
-							unknown_dependencies_name.insert(len(unknown_dependencies_name),pair)
+							indx = len(unknown_dependencies_name)
+							unknown_dependencies_name.insert(indx,pair)
 							cnt += 1
 						if(cnt == 2):
 							break
@@ -108,7 +127,8 @@ def extract_unknown_dependencies():
 					for i in range(0 , dependent_index-1,1):
 						pair = ["ROOT",heads_name[i]]
 						if(pair not in unknown_dependencies_name and pair not in tags_pair):
-							unknown_dependencies_name.insert(len(unknown_dependencies_name),pair)
+							indx = len(unknown_dependencies_name)
+							unknown_dependencies_name.insert(indx,pair)
 							cnt += 1
 						if(cnt == 2):
 							break 
@@ -200,7 +220,10 @@ for line in f:
         tags.insert(indx,line_state)
         indx = len(tags_pair)
         tags_pair.insert(indx,line_state_pairs)
-
+		
+		
+		
+		
         if(line_state[0] not in word_data):
             word_data[line_state[0]] = line1[0]	
         if(line_state[1] not in word_data):
