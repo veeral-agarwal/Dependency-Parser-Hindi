@@ -187,6 +187,10 @@ for line in f:
 		indx = len(line_state)
 		line1 = line.split(";")
 		line_state.insert(indx,line1[0].split(' ')[5])
+		if len(line1[1].split(' '))<7:
+			line_number-=1
+			continue
+
 		line_state.insert(indx+1,line1[1].split(' ')[6])
 		line_state.insert(indx+2,line1[2].split(' ')[1])
 		line_state.insert(indx+3,line1[3].split(' ')[1])

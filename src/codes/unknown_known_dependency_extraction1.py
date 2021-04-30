@@ -174,6 +174,8 @@ for line in f:
         indx=len(line_state_pairs)
         line_state_pairs.insert(indx,line1[0].split(" ")[5])
         indx = len(line_state)
+		
+		
         line_state.insert(indx,line1[1].split(" ")[6])
         indx = len(line_state_pairs)
         line_state_pairs.insert(indx,line1[1].split(" ")[6])
