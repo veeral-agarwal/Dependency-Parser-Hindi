@@ -7,7 +7,7 @@ import re
 flag,count = 0,0
 f = open(argv[1], "r")
 for line in f:
-    # print(count)
+
     if (line.rstrip()):
         line = re.sub("\s+"," ",line)
         troot = 0 

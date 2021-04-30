@@ -12,8 +12,6 @@ def extract_unknown_dependencies():
              
 			if (head_index - dependent_index) > 3:
 				cnt,pair1,pair2 = 0,[heads_name[dependent_index] , heads_name[head_index - 1]],[heads_name[dependent_index] , heads_name[dependent_index + 1]]
-				# pair2 = [heads_name[dependent_index] , heads_name[dependent_index + 1]]
-				# cnt = 0
 				if pair1 not in unknown_dependencies_name :
 					if pair1 not in tags_pair:
 						indx = len(unknown_dependencies_name) 
@@ -52,11 +50,8 @@ def extract_unknown_dependencies():
 		elif(tags[dependency][2] == "L"):
 			if(tags[dependency][0] != "ROOT" and tags[dependency][1] != "BLK"):
 				dependent_index,head_index = heads_name.index(tags[dependency][1]),heads_name.index(tags[dependency][0])
-				# dependent_index = heads_name.index(tags[dependency][1])
 				if (dependent_index ) > 3+head_index:
 					cnt,pair2,pair1 =0,[heads_name[dependent_index - 1] , heads_name[dependent_index]] , [heads_name[head_index + 1] , heads_name[dependent_index]]
-					# pair2 = [heads_name[dependent_index - 1] , heads_name[dependent_index]]
-					# cnt = 0
 					if pair1 not in unknown_dependencies_name and pair1 not in tags_pair:
 						indx = len(unknown_dependencies_name)
 						unknown_dependencies_name.insert(indx,pair1)
@@ -89,9 +84,7 @@ def extract_unknown_dependencies():
 							unknown_dependencies_name.insert(indx,pair)
 
 			else:
-				# for BLK and ROOT(for ex. "vgf")
 				dependent_index,cnt = heads_name.index(tags[dependency][1]),0
-				# cnt = 0
 				for i in range(dependent_index-1 , -1 , -1):
     			
 					indx,pair = 0,[heads_name[i], heads_name[dependent_index]]
@@ -111,10 +104,8 @@ def extract_unknown_dependencies():
 					if(cnt == 2):
 						break
 
-				# for ROOT 
 				if(tags[dependency][0] != "ROOT"):
 					cnt,dependent_index = 0,heads_name.index(tags[dependency][1])
-					# cnt = 0
 					for i in range(dependent_index-1 , -1 , -1):
 						pair = ["ROOT",heads_name[i]]
 						if(pair not in unknown_dependencies_name and pair not in tags_pair):
@@ -157,13 +148,11 @@ for line in f:
     if(pattern_start.match(line)):
         line_number = 0
         sentence_id = line.split("'")[1]
-        # print(sentence_id)
-
+        
 
     elif(pattern_end.match(line)):
         extract_unknown_dependencies()
         print_unknown_dependencies()
-        # print('<end>')
         tags_pair,tags,unknown_dependencies_name,heads_name=[],[],[],[]
         word_data.clear()
         

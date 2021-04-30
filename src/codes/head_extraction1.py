@@ -140,7 +140,6 @@ for line in f:
 
         elif(line1[0].strip() == "</Sentence>"):
 
-            # index = find_head(head_o_pos)
             head = chunk_words[find_head(head_o_pos)]
             head_pos = chunk_pos[find_head(head_o_pos)]
             head_lemma = chunk_lemma[find_head(head_o_pos)]
@@ -180,7 +179,6 @@ for line in f:
         elif(line1[0] == 'H'):
 
             if(len(chunk_words)):
-                # index = find_head(head_o_pos)
                 head = chunk_words[find_head(head_o_pos)]
                 head_pos = chunk_pos[find_head(head_o_pos)]
                 head_lemma = chunk_lemma[find_head(head_o_pos)]

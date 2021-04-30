@@ -7,7 +7,7 @@ new_dependencies = []
 
 f = open(sys.argv[1], 'r')
 for line in f:
-    # print(count)
+
     if (line.rstrip()):
         line = re.sub("\s+", " ", line)
         line1 = line.split(" ")
@@ -18,8 +18,6 @@ for line in f:
             print("<Sentence id=" + '\'' + str(count) + '\'>')
 
         elif(line1[0].strip() == "</Sentence>"):
-
-            # find_dependencies()
             for t in range(0,len(dependencies)):
                 temp = []
                 if (dependencies[t][7] != "ROOT"):
@@ -77,7 +75,6 @@ for line in f:
             for t in range(len(new_dependencies)):
                 for j in new_dependencies[t]:
                     print(j + " ", end=" ")
-                    # print('', end = ' ')
                 print()
             dependencies.clear()
             new_dependencies.clear()

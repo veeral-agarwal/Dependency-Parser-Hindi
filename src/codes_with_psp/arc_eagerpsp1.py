@@ -85,7 +85,7 @@ def right_arc(relation):
 	stack.insert(indx , buffer_top)
 
 def reduce():
-    # indx = len(stack)
+
 	stack.pop()
 
 def shift():

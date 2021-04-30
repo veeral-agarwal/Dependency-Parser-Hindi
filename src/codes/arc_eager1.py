@@ -86,7 +86,6 @@ def right_arc(relation):
 	stack.insert(indx , buffer_top)
 
 def reduce():
-    # indx = len(stack)
 	stack.pop()
 
 def shift():
@@ -116,10 +115,6 @@ def dependency_link():
 def is_parsable():
 	while(not(len(stack) == 1 and len(buffer) == 1)):
 
-		# print(stack[len(stack) - 1],end=' ')
-		# if(len(buffer) > 0):
-			# print(buffer[len(buffer) - 1])
-		
 		if(len(buffer) > 1):
 			if(len(stack) > 0):
 				orignal_dependency,relation = check_orignal_dependencies()
@@ -132,22 +127,18 @@ def is_parsable():
 							
 							if(check_reduce() == 1):
 								reduce()
-								# print('reduce')
 							else:
 								return 0	
 						else:
 							shift()
-							# print('shift')
 					else:
 						shift()
-						# print('shift')								
 
 
 				elif(orignal_dependency == "L"):
 					can_right_arc = check_right_arc()
 					if(can_right_arc == True):
 						right_arc(relation)
-						# print("right_arc")
 					else:
 						return 0
 
@@ -155,7 +146,6 @@ def is_parsable():
 					can_left_arc = check_left_arc()
 					if(can_left_arc == True):
 						left_arc(relation)
-						# print("left_arc")
 					else:
 						return 0
 
@@ -163,7 +153,6 @@ def is_parsable():
 			can_reduce = check_reduce()
 			if(can_reduce==True):
 				reduce()
-				# print('reduce')
 			else:
 				return 0
 
@@ -235,16 +224,11 @@ for line in f:
 		flag = is_parsable()
 
 		if(flag == 1):
-			# print('parsable')
 			a = 1
 		else:
-			# print('Not parsable')
 			indx = len(not_parasble_sentences)
 			not_parasble_sentences.insert(indx, sentence_id)
 			count+=1
-
-
-		# print(dependencies)	
 
 		flagki = 0	
 		tags=[]
@@ -252,8 +236,4 @@ for line in f:
 		buffer=[]
 		dependencies=[]	
 
-# print(count)
 print(not_parasble_sentences)
-# print(len(not_parasble_sentences))
-		
-
