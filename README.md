@@ -1,3 +1,6 @@
+# Dependency Parser [Hindi]
+done as a course project of Intro to NLP | Spring 2021
+
 ## data
 http://ltrc.iiit.ac.in/treebank_H2014/ 
 
