@@ -1,5 +1,5 @@
 # Dependency Parser [Hindi]
-done as a course project of Intro to NLP | Spring 2021 < br>
+done as a course project of Intro to NLP | Spring 2021 <br>
 In this project, a dependency parser (Hindi) for which the training dataset was given. A dependency parser identifies the syntactic dependency between words in a
 sentence. There are few well-developed tools for Indian languages.
 
